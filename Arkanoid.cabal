@@ -1,0 +1,72 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.33.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: f3d42eca22667f825851b3d95f474917345c4a33636fac57e205c7cd40757225
+
+name:           Arkanoid
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/task#readme>
+homepage:       https://github.com/githubuser/task#readme
+bug-reports:    https://github.com/githubuser/task/issues
+author:         Tolkachev Denis
+maintainer:     .
+copyright:      2021 Denis Tolkachev
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/githubuser/task
+
+library
+  exposed-modules:
+      Run
+    , Structures
+    , Move
+    , Constants
+    , GamePlay
+  other-modules:
+      Paths_task
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+    , gloss
+    , random
+  default-language: Haskell2010
+
+executable task-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_task
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , gloss
+    , random
+    , Arkanoid
+  default-language: Haskell2010
+
+test-suite task-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_task
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , gloss
+    , random
+    , Arkanoid
+  default-language: Haskell2010
