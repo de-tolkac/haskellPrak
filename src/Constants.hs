@@ -1,5 +1,20 @@
 module Constants where
 
+
+import Graphics.Gloss.Interface.Pure.Game
+
+-- Colors
+getBrickColor :: Color
+getBrickColor = yellow
+
+getBallColor :: Color 
+getBallColor = red 
+
+getPlatformColor :: Color 
+getPlatformColor = green
+
+-- End
+
 platformWidth :: Int 
 platformWidth = 300
 

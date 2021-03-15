@@ -10,7 +10,7 @@ import GamePlay
 
 -- Начальная инициализация 
 initState :: GameState 
-initState = GameState (ColorConfig yellow green red) 5 (0, 0) (0, 0) [] False False
+initState = GameState (ColorConfig getBrickColor getPlatformColor getBallColor) 5 (0, 0) (0, 0) [] False False
 
 -- Отрисовка
 drawApp :: GameState -> Picture
