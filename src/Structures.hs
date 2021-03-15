@@ -11,17 +11,17 @@ data Direction = Left | Right deriving Enum
 type Platform = Int 
 type Wall = Int
 type Bottom = Int 
-type Brick = Int 
+type BrickHit = Int 
 type NotCollide = Int 
 
-data CollideObject = Platform | Wall | Bottom | Brick | NotCollide deriving Enum 
+data CollideObject = Platform | Wall | Bottom | BrickHit | NotCollide deriving Enum 
 
 data ColorConfig = ColorConfig
     {   color1 :: Color
     ,   color2 :: Color
     }
 
-data Rect = Rect 
+data Brick = Brick 
     {
         position :: Point
     ,   hp       :: Int
@@ -33,7 +33,7 @@ data GameState = GameState
     ,    score            :: Int
     ,    ballPosition     :: Point
     ,    platformPosition :: Point
-    ,    bricks           :: [Rect]
+    ,    bricks           :: [Brick]
     ,    pause            :: Bool
     ,    gameOver         :: Bool
     }

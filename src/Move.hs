@@ -15,6 +15,10 @@ isCollide _ = (False, NotCollide)
 сollidePlatform :: GameState -> GameState 
 сollidePlatform x = x
 
+-- Обработка удара по цели. Вычитаем ХП (или уничтожаем)
+hitBrick :: GameState -> GameState 
+hitBrick x = x
+
 -- Движение платформы
 movePlatform :: GameState  -> Direction -> GameState 
 movePlatform x y = x

@@ -17,3 +17,6 @@ brickHeight = 30
 
 ballSpeed :: Float 
 ballSpeed = 2.0
+
+brickInitialHP :: Int 
+brickInitialHP = 3
