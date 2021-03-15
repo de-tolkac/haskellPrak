@@ -17,8 +17,9 @@ type NotCollide = Int
 data CollideObject = Platform | Wall | Bottom | BrickHit | NotCollide deriving Enum 
 
 data ColorConfig = ColorConfig
-    {   color1 :: Color
-    ,   color2 :: Color
+    {   brickColor :: Color
+    ,   ballColor :: Color
+    ,   platformColor :: Color
     }
 
 data Brick = Brick 
