@@ -12,12 +12,16 @@ isCollide :: GameState -> (Bool, CollideObject)
 isCollide _ = (False, NotCollide)
 
 -- Столкновение с платформой
-сollidePlatform :: GameState -> GameState 
-сollidePlatform x = x
+hitPlatform :: GameState -> GameState 
+hitPlatform x = x
 
 -- Обработка удара по цели. Вычитаем ХП (или уничтожаем)
 hitBrick :: GameState -> GameState 
 hitBrick x = x
+
+-- Обработка столкновения со стеной
+hitWall :: GameState  -> GameState 
+hitWall x = x
 
 -- Движение платформы
 movePlatform :: GameState  -> Direction -> GameState 
