@@ -6,10 +6,9 @@ import Structures
 updateBallPosition :: GameState -> GameState
 updateBallPosition x = x
 
--- Первое возвращаемое значение - есть ли столкновение
--- Второе возвращаемое значение - столкновение с каким объектом
-isCollide :: GameState -> (Bool, CollideObject) 
-isCollide _ = (False, NotCollide)
+-- 
+isCollide :: GameState -> Maybe CollideObject  
+isCollide _ = Just BrickHit
 
 -- Столкновение с платформой
 hitPlatform :: GameState -> GameState 

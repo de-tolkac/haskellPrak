@@ -31,4 +31,4 @@ updateFrame _ x = x
 -- Main Loop
 run :: IO ()
 run = do
-    play FullScreen black 60 initState drawApp handleEvent updateFrame 
+    play FullScreen black 60 initState drawApp handleEvent updateFrame

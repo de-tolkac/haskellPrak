@@ -2,19 +2,10 @@ module Structures where
 
 import Graphics.Gloss.Interface.Pure.Game
 
-type Left = String
-type Right = String 
 
 data Direction = Left | Right deriving Enum
 
-
-type Platform = Int 
-type Wall = Int
-type Bottom = Int 
-type BrickHit = Int 
-type NotCollide = Int 
-
-data CollideObject = Platform | Wall | Bottom | BrickHit | NotCollide deriving Enum 
+data CollideObject = Platform | Wall | Bottom | BrickHit  deriving Enum 
 
 data ColorConfig = ColorConfig
     {   brickColor :: Color
