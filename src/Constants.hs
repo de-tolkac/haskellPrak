@@ -16,16 +16,16 @@ getPlatformColor = green
 
 
 -- Platform
-platformWidth :: Int 
-platformWidth = 300
+platformWidth :: Float 
+platformWidth = 200
 
-platformHeight :: Int 
-platformHeight = 50
+platformHeight :: Float 
+platformHeight = 20
 -- End
 
 
 -- Ball
-ballRadius :: Int 
+ballRadius :: Float 
 ballRadius = 10
 
 ballSpeed :: Float 
@@ -34,10 +34,10 @@ ballSpeed = 2.0
 
 
 --Brick
-brickWidth :: Int 
+brickWidth :: Float 
 brickWidth = 100
 
-brickHeight :: Int 
+brickHeight :: Float 
 brickHeight = 30
 
 brickInitialHP :: Int 

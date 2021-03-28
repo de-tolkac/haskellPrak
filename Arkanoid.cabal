@@ -32,6 +32,8 @@ library
     , Move
     , Constants
     , GamePlay
+    , BricksLib
+    , PlatformLib
   other-modules:
       Paths_task
   hs-source-dirs:
