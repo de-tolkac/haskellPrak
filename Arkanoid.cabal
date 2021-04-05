@@ -29,11 +29,11 @@ library
   exposed-modules:
       Run
     , Structures
-    , Move
     , Constants
     , GamePlay
     , BricksLib
     , PlatformLib
+    , BallLib
   other-modules:
       Paths_task
   hs-source-dirs:

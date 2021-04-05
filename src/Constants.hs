@@ -21,6 +21,9 @@ platformWidth = 200
 
 platformHeight :: Float 
 platformHeight = 20
+
+platformSpeed :: Float 
+platformSpeed = 10
 -- End
 
 
@@ -29,7 +32,7 @@ ballRadius :: Float
 ballRadius = 10
 
 ballSpeed :: Float 
-ballSpeed = 2.0
+ballSpeed = 5.0
 -- End
 
 
