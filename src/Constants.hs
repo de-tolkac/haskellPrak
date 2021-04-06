@@ -19,8 +19,14 @@ getPlatformColor = green
 platformWidth :: Float 
 platformWidth = 200
 
+platformWidthDiv2 :: Float 
+platformWidthDiv2 = 100
+
 platformHeight :: Float 
 platformHeight = 20
+
+platformHeightDiv2 :: Float 
+platformHeightDiv2 = 10
 
 platformSpeed :: Float 
 platformSpeed = 14
@@ -40,8 +46,14 @@ ballSpeed = 7.0
 brickWidth :: Float 
 brickWidth = 100
 
+brickWidthDiv2 :: Float 
+brickWidthDiv2 = 50
+
 brickHeight :: Float 
 brickHeight = 30
+
+brickHeightDiv2 :: Float 
+brickHeightDiv2 = 15
 
 brickInitialHP :: Int 
 brickInitialHP = 3

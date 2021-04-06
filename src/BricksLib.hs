@@ -14,16 +14,25 @@ import Data.Monoid
 -- Инициалзиция кирпичей 
 initBricks :: [Brick]
 initBricks = [
-                Brick (-382, 300) 3, Brick (-278, 300) 3, Brick (-174, 300) 3, Brick (-70, 300) 3,
-                Brick (70, 300) 3,   Brick (174, 300) 3,  Brick (278, 300)  3, Brick (382, 300) 3,
-                Brick (-382, 260) 3, Brick (-278, 260) 3, Brick (-174, 260) 3, Brick (-70, 260) 3,
-                Brick (70, 260) 3,   Brick (174, 260) 3,  Brick (278, 260)  3, Brick (382, 260) 3,
-                Brick (-382, 220) 3, Brick (-278, 220) 3, Brick (-174, 220) 3, Brick (-70, 220) 3,
-                Brick (70, 220) 3,   Brick (174, 220) 3,  Brick (278, 220)  3, Brick (382, 220) 3
+                --Brick (-382, 300) 3, Brick (-278, 300) 3, Brick (-174, 300) 3, Brick (-70, 300) 3,
+                --Brick (70, 300) 3,   Brick (174, 300) 3,  Brick (278, 300)  3, Brick (382, 300) 3,
+                --Brick (-382, 260) 3, Brick (-278, 260) 3, Brick (-174, 260) 3, Brick (-70, 260) 3,
+                --Brick (70, 260) 3,   Brick (174, 260) 3,  Brick (278, 260)  3, Brick (382, 260) 3,
+                --Brick (-382, 220) 3, Brick (-278, 220) 3, Brick (-174, 220) 3, Brick (-70, 220) 3,
+                --Brick (70, 220) 3,   Brick (174, 220) 3,  Brick (278, 220)  3, Brick (382, 220) 3
+                Brick (-370, 300) 3, Brick (-270, 300) 3, Brick (-170, 300) 3, Brick (-70, 300) 3,
+                Brick (70, 300) 3,   Brick (170, 300) 3,  Brick (270, 300)  3, Brick (370, 300) 3,
+                Brick (-370, 260) 3, Brick (-270, 260) 3, Brick (-170, 260) 3, Brick (-70, 260) 3,
+                Brick (70, 260) 3,   Brick (170, 260) 3,  Brick (270, 260)  3, Brick (370, 260) 3,
+                Brick (-370, 220) 3, Brick (-270, 220) 3, Brick (-170, 220) 3, Brick (-70, 220) 3,
+                Brick (70, 220) 3,   Brick (170, 220) 3,  Brick (270, 220)  3, Brick (370, 220) 3
             ]
 
 drawBricks :: [Brick] -> Picture
-drawBricks (Brick (x, y) hp:xs) = Pictures [Color (getColorOfBrick hp) $ uncurry Translate (x, y) (uncurry rectangleSolid (brickWidth, brickHeight)), drawBricks xs]
+drawBricks (Brick (x, y) hp:xs) = Pictures [rect, frame, drawBricks xs]
+    where
+        rect = Color (getColorOfBrick hp) $ uncurry Translate (x, y) (uncurry rectangleSolid (brickWidth, brickHeight))
+        frame = Translate x y $ Color black (rectangleWire brickWidth brickHeight)
 drawBricks _ = Pictures []
 
 getColorOfBrick :: Int -> Color
@@ -55,8 +64,8 @@ collideBrick brick@Brick{..} ballPosition ballDirection  | cond && (testX /= new
                         r = ballRadius 
                         newX = fst ballPosition + ballSpeed * fst ballDirection
                         newY = snd ballPosition + ballSpeed * snd ballDirection
-                        brickX = fst position - brickWidth  / 2
-                        brickY = snd position + brickHeight  / 2
+                        brickX = fst position - brickWidthDiv2
+                        brickY = snd position + brickHeightDiv2
                         testX
                             | newX < brickX = brickX
                             | newX > brickX + brickWidth = brickX + brickWidth

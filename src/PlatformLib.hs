@@ -46,8 +46,8 @@ collidePlatform state@GameState{..}   | dist <= r * r/4 = flipDirectionVerticaly
                         r = ballRadius 
                         newX = fst ballPosition + ballSpeed * fst ballDirection
                         newY = snd ballPosition + ballSpeed * snd ballDirection
-                        platformX = fst platformPosition - (platformWidth / 2)
-                        platformY = snd platformPosition + (platformHeight / 2)
+                        platformX = fst platformPosition - platformWidthDiv2
+                        platformY = snd platformPosition + platformHeightDiv2
                         testX
                             | newX < platformX = platformX
                             | newX > platformX + platformWidth = platformX + platformWidth
@@ -62,7 +62,7 @@ collidePlatform state@GameState{..}   | dist <= r * r/4 = flipDirectionVerticaly
                         distCX = newX - fst platformPosition
                         distCY = newY - platformY
                         distFromCenter = sqrt((distCX * distCX) + (distCY * distCY)) - r/2
-                        angleABS = (platformWidth / 2) / 180.0 * distFromCenter
+                        angleABS = platformWidthDiv2 / 180.0 * distFromCenter
                         angle = angleABS * if newX > fst platformPosition then 1 else -1
                         --angle = if newX > fst platformPosition - 2*r && newX < fst platformPosition + 2*r then 0 else angleT
                         dist = (distX*distX) + (distY*distY)
