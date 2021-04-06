@@ -32,6 +32,7 @@ data GameState = GameState
     ,    pause            :: Bool
     ,    gameOver         :: Bool
     ,    gameStarted      :: Bool
+    ,    gameFinished     :: Bool
     ,    leftKeyPressed   :: Bool
     ,    rightKeyPressed  :: Bool
     }
