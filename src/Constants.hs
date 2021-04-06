@@ -32,7 +32,7 @@ ballRadius :: Float
 ballRadius = 10
 
 ballSpeed :: Float 
-ballSpeed = 5.0
+ballSpeed = 10.0
 -- End
 
 

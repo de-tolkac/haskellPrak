@@ -52,6 +52,6 @@ applyPositionP state@GameState{..} = state{ballPosition = newPosition}
         newPosition = (newX, newY)
 
 resolvePlatformCollision :: GameState  -> GameState 
-resolvePlatformCollision state@GameState{..} = applyPositionP newState
+resolvePlatformCollision state@GameState{..} = newState
     where
         newState = state{ballDirection = collidePlatform state}

@@ -35,3 +35,16 @@ data GameState = GameState
     ,    leftKeyPressed   :: Bool
     ,    rightKeyPressed  :: Bool
     }
+
+data HitBrick = HitBrick
+    {
+        hit :: Bool
+    ,   direction :: Point
+    ,   brick :: Maybe Brick
+    }
+
+data CollideBricksReturn = CollideBricksReturn
+    {
+        newBricks :: [Brick]
+    ,   state :: GameState
+    }

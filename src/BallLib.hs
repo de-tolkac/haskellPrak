@@ -11,6 +11,8 @@ import GamePlay
 
 import PlatformLib
 
+import BricksLib
+
 flipDirectionVerticaly :: GameState -> GameState
 flipDirectionVerticaly  state@GameState{..} = state{ballDirection  = newDirection}
         -- Direction = Direction - 2.f * (Direction.x * n.x + Direction.y * n.y) * n 
@@ -37,7 +39,7 @@ resolveCollide :: GameState -> GameState
 resolveCollide state@GameState{..} | wallCollisionType == 1 = flipDirectionVerticaly state
                                    | wallCollisionType == 2 = flipDirectionHorizontaly state
                                    | wallCollisionType == 3 = gameOverFunc state
-                                   | otherwise  = resolvePlatformCollision state
+                                   | otherwise  = resolveBricksCollision (resolvePlatformCollision state)
         where
             wallCollisionType = 
                 case isCollideWalls state of

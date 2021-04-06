@@ -35,13 +35,15 @@ printN x y = do
 
 eA :: GameState -> IO Picture
 eA state@GameState{..} = do
-                            printN (fst ballPosition) (snd ballPosition)
+                            --printN (fst ballPosition) (snd ballPosition)
                             drawApp state
 drawApp :: GameState -> IO Picture
-drawApp (GameState (ColorConfig c1 c2 c3) n (x, y) (vx, vy) platformPosition bricks isPause isGameover isStarted leftKeyPressed rightKeyPressed) = return (Pictures [score, drawBricks bricks, drawPlatform platformPosition, ball, frame])
+drawApp (GameState (ColorConfig c1 c2 c3) n (x, y) (vx, vy) platformPosition bricks isPause isGameover isStarted leftKeyPressed rightKeyPressed) = return (Pictures [score, drawBricks bricks, drawPlatform platformPosition, ball, frame, gameOverMsg])
     where
         scoreNum = Text (show n)
         scoreShift = 600
+        gameOverText = Text (if isGameover then "Game Over!" else "")
+        gameOverMsg = Translate (-360) 0 $ Color red gameOverText
         score = Translate scoreShift 0 $ Color c2 scoreNum
         frame = Translate 0 0 $ Color yellow (rectangleWire 1000 1000)
         ball = Translate x y  $ Color red (circleSolid ballRadius)
@@ -60,7 +62,8 @@ handleEvent _ x = return x
 
 -- Апдейт кадра
 updateFrame :: Float -> GameState -> IO GameState
-updateFrame t state@GameState{..}   | gameStarted = do
+updateFrame t state@GameState{..}   | gameOver = return state
+                                    | gameStarted = do
                                         let newState = changeBallPosition state
                                         if  leftKeyPressed
                                             then do
