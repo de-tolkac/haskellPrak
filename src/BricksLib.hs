@@ -87,7 +87,11 @@ insertBrick (b:bs) br = new
               Just c -> b:fromJust br:bs
               Nothing -> b:bs
 
-insertBrick _ br = [fromJust br]
+insertBrick _ br = new
+    where
+        new = case br of
+                Just c -> [fromJust br]
+                Nothing -> []
 
 checkBricks :: [Brick] -> [Brick] -> Bool ->  GameState -> CollideBricksReturn 
 checkBricks _ b True state = CollideBricksReturn b state

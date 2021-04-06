@@ -16,22 +16,41 @@ changePlatformPosition (x, y) k = (if newX < 400 && newX > -400 then newX else x
     where 
         newX = x + k*platformSpeed 
 
-flipDirectionVerticalyP :: GameState -> Point
-flipDirectionVerticalyP  state@GameState{..} = newDirection
+flipDirectionVerticalyP :: Float -> GameState -> Point
+flipDirectionVerticalyP  angle state@GameState{..} = newDirection
         -- Direction = Direction - 2.f * (Direction.x * n.x + Direction.y * n.y) * n 
         -- n = (0.f, 1.f)
         where 
-            newDirection = (fst ballDirection, (-1.0) * snd ballDirection)
+            --newX = fst ballDirection
+            --newY = (-1.0) * snd ballDirection
+            --newDir = (newX*cos angle + newY * sin angle, newY * cos angle + newX * sin angle)
+            --len = sqrt(fst newDir * fst newDir + snd newDir * snd newDir)
+            --newDirection = (fst newDir / len, snd newDir / len)
+            x = 0.0
+            y = 1.0
+            --n = (y * sin angle, y * cos angle)
+            -- (dirX, dirY) - 2*(dirX*nX + dirY*nY)*(nX, nY)
+            --nX = y * sin angle
+            --nY = y * cos angle
+            dirX = x
+            dirY = y
+            --k = 2*dirX*nX + 2*dirY*nY
+            --newDirection = (dirX - k * nX, dirY - k*nY)
+            a = angle * 0.01745 -- (pi / 180)
+            newD = (dirX * cos a + dirY * sin a, dirY * cos a + dirX * sin a)
+            --len = sqrt (fst newD * fst newD + snd newD * snd newD)
+            --newDirection = (fst newD / len, snd newD / len)
+            newDirection = newD
 
 collidePlatform :: GameState -> Point
-collidePlatform state@GameState{..}   | (distX*distX) + (distY*distY) <= r*r - 2 * r = flipDirectionVerticalyP state
+collidePlatform state@GameState{..}   | sqrt dist <= r/2 = flipDirectionVerticalyP angle state
                                       | otherwise = ballDirection
                     where
                         r = ballRadius 
                         newX = fst ballPosition + ballSpeed * fst ballDirection
                         newY = snd ballPosition + ballSpeed * snd ballDirection
-                        platformX = fst platformPosition - platformWidth / 2
-                        platformY = snd platformPosition + platformHeight / 2
+                        platformX = fst platformPosition - (platformWidth / 2)
+                        platformY = snd platformPosition + (platformHeight / 2)
                         testX
                             | newX < platformX = platformX
                             | newX > platformX + platformWidth = platformX + platformWidth
@@ -43,6 +62,14 @@ collidePlatform state@GameState{..}   | (distX*distX) + (distY*distY) <= r*r - 2
                         
                         distX = newX - testX
                         distY = newY - testY
+                        distCX = newX - fst platformPosition
+                        distCY = newY - platformY
+                        distFromCenter = sqrt((distCX * distCX) + (distCY * distCY)) - r/2
+                        angleABS = (platformWidth / 2) / 180.0 * distFromCenter
+                        angle = angleABS * if newX > fst platformPosition then 1 else -1
+                        --angle = if newX > fst platformPosition - 2*r && newX < fst platformPosition + 2*r then 0 else angleT
+                        dist = (distX*distX) + (distY*distY)
+
 
 applyPositionP :: GameState -> GameState 
 applyPositionP state@GameState{..} = state{ballPosition = newPosition}

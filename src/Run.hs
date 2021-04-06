@@ -21,7 +21,7 @@ import Text.Printf
 
 -- Начальная инициализация 
 initState :: GameState 
-initState = GameState (ColorConfig getBrickColor getPlatformColor getBallColor) 0 (0, -280) (0.35, -1.0) (0, -300) initBricks False False False False False
+initState = GameState (ColorConfig getBrickColor getPlatformColor getBallColor) 0 (0, -280) (0.0, 1.0) (0, -300) initBricks False False False False False
 
 printN :: Float -> Float -> IO Float
 printN x y = do
@@ -35,7 +35,7 @@ printN x y = do
 
 eA :: GameState -> IO Picture
 eA state@GameState{..} = do
-                            --printN (fst ballPosition) (snd ballPosition)
+                            printN (fst ballPosition) (snd ballPosition)
                             drawApp state
 drawApp :: GameState -> IO Picture
 drawApp (GameState (ColorConfig c1 c2 c3) n (x, y) (vx, vy) platformPosition bricks isPause isGameover isStarted leftKeyPressed rightKeyPressed) = return (Pictures [score, drawBricks bricks, drawPlatform platformPosition, ball, frame, gameOverMsg])
