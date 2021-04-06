@@ -35,7 +35,7 @@ printN x y = do
 
 eA :: GameState -> IO Picture
 eA state@GameState{..} = do
-                            printN (fst ballPosition) (snd ballPosition)
+                            -- printN (fst ballPosition) (snd ballPosition)
                             drawApp state
 drawApp :: GameState -> IO Picture
 drawApp (GameState (ColorConfig c1 c2 c3) n (x, y) (vx, vy) platformPosition bricks isPause isGameover isStarted leftKeyPressed rightKeyPressed) = return (Pictures [score, drawBricks bricks, drawPlatform platformPosition, ball, frame, gameOverMsg])

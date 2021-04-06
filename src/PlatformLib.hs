@@ -26,24 +26,21 @@ flipDirectionVerticalyP  angle state@GameState{..} = newDirection
             --newDir = (newX*cos angle + newY * sin angle, newY * cos angle + newX * sin angle)
             --len = sqrt(fst newDir * fst newDir + snd newDir * snd newDir)
             --newDirection = (fst newDir / len, snd newDir / len)
-            x = 0.0
-            y = 1.0
             --n = (y * sin angle, y * cos angle)
             -- (dirX, dirY) - 2*(dirX*nX + dirY*nY)*(nX, nY)
             --nX = y * sin angle
             --nY = y * cos angle
-            dirX = x
-            dirY = y
+            dirX = 0.0
+            dirY = 1.0
             --k = 2*dirX*nX + 2*dirY*nY
             --newDirection = (dirX - k * nX, dirY - k*nY)
             a = angle * 0.01745 -- (pi / 180)
-            newD = (dirX * cos a + dirY * sin a, dirY * cos a + dirX * sin a)
+            newDirection = (dirX * cos a + dirY * sin a, dirY * cos a + dirX * sin a)
             --len = sqrt (fst newD * fst newD + snd newD * snd newD)
             --newDirection = (fst newD / len, snd newD / len)
-            newDirection = newD
 
 collidePlatform :: GameState -> Point
-collidePlatform state@GameState{..}   | sqrt dist <= r/2 = flipDirectionVerticalyP angle state
+collidePlatform state@GameState{..}   | dist <= r * r/4 = flipDirectionVerticalyP angle state
                                       | otherwise = ballDirection
                     where
                         r = ballRadius 
