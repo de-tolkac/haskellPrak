@@ -20,13 +20,15 @@ initBricks = [
                 --Brick (70, 260) 3,   Brick (174, 260) 3,  Brick (278, 260)  3, Brick (382, 260) 3,
                 --Brick (-382, 220) 3, Brick (-278, 220) 3, Brick (-174, 220) 3, Brick (-70, 220) 3,
                 --Brick (70, 220) 3,   Brick (174, 220) 3,  Brick (278, 220)  3, Brick (382, 220) 3
+                
                 Brick (-370, 300) 3, Brick (-270, 300) 3, Brick (-170, 300) 3, Brick (-70, 300) 3,
                 Brick (70, 300) 3,   Brick (170, 300) 3,  Brick (270, 300)  3, Brick (370, 300) 3,
                 Brick (-370, 260) 3, Brick (-270, 260) 3, Brick (-170, 260) 3, Brick (-70, 260) 3,
                 Brick (70, 260) 3,   Brick (170, 260) 3,  Brick (270, 260)  3, Brick (370, 260) 3,
                 Brick (-370, 220) 3, Brick (-270, 220) 3, Brick (-170, 220) 3, Brick (-70, 220) 3,
-                Brick (70, 220) 3,   Brick (170, 220) 3,  Brick (270, 220)  3, Brick (370, 220) 3
-            ]
+                Brick (70, 220) 3,   Brick (170, 220) 3,  Brick (270, 220)  3, Brick (370, 220) 3         
+    ]
+
 
 drawBricks :: [Brick] -> Picture
 drawBricks (Brick (x, y) hp:xs) = Pictures [rect, frame, drawBricks xs]
@@ -41,15 +43,15 @@ getColorOfBrick 2 = yellow
 getColorOfBrick _ = red 
 
 
-flipDirectionVerticalyB :: Point -> Point
-flipDirectionVerticalyB  direction = newDirection
+flipDirectionVerticalyBrick :: Point -> Point
+flipDirectionVerticalyBrick  direction = newDirection
         -- Direction = Direction - 2.f * (Direction.x * n.x + Direction.y * n.y) * n 
         -- n = (0.f, 1.f)
         where 
             newDirection = (fst direction, (-1.0) * snd direction)
 
-flipDirectionHorizontalyB :: Point -> Point
-flipDirectionHorizontalyB  direction = newDirection
+flipDirectionHorizontalyBrick :: Point -> Point
+flipDirectionHorizontalyBrick  direction = newDirection
         -- Direction = Direction - 2.f * (Direction.x * n.x + Direction.y * n.y) * n 
         -- n = (0.f, 1.f)
         where 
@@ -57,8 +59,8 @@ flipDirectionHorizontalyB  direction = newDirection
 
 
 collideBrick :: Brick -> Point -> Point -> HitBrick 
-collideBrick brick@Brick{..} ballPosition ballDirection  | cond && (testX /= newX) = HitBrick True (flipDirectionHorizontalyB ballDirection) (Just brick{hp = hp - 1})
-                                                         | cond && (testY /= newY) = HitBrick True (flipDirectionVerticalyB ballDirection) (Just brick{hp = hp - 1})
+collideBrick brick@Brick{..} ballPosition ballDirection  | cond && (testX /= newX) = HitBrick True (flipDirectionHorizontalyBrick ballDirection) (Just brick{hp = hp - 1})
+                                                         | cond && (testY /= newY) = HitBrick True (flipDirectionVerticalyBrick ballDirection) (Just brick{hp = hp - 1})
                                                          | otherwise = HitBrick False ballDirection (Just brick)
                     where
                         r = ballRadius 
@@ -80,14 +82,6 @@ collideBrick brick@Brick{..} ballPosition ballDirection  | cond && (testX /= new
                         cond = (distX*distX) + (distY*distY) <= r*r
 
 
-applyPositionB :: Bool -> GameState -> GameState 
-applyPositionB hit state@GameState{..} = state{ballPosition = newPosition}
-    where 
-        newX = fst ballPosition  + ballSpeed * fst ballDirection
-        newY = snd ballPosition  + ballSpeed * snd ballDirection
-        newPosition 
-                |   hit =  (newX, newY)
-                |   otherwise = ballPosition
 
 insertBrick :: [Brick] -> Maybe Brick -> [Brick]
 insertBrick (b:bs) br = new

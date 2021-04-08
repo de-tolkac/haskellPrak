@@ -4,14 +4,11 @@ module Constants where
 import Graphics.Gloss.Interface.Pure.Game
 
 -- Colors
-getBrickColor :: Color
-getBrickColor = yellow
-
 getBallColor :: Color 
 getBallColor = red 
 
 getPlatformColor :: Color 
-getPlatformColor = green
+getPlatformColor = blue
 -- End
 
 
@@ -54,8 +51,5 @@ brickHeight = 30
 
 brickHeightDiv2 :: Float 
 brickHeightDiv2 = 15
-
-brickInitialHP :: Int 
-brickInitialHP = 3
 -- End
 

@@ -7,24 +7,16 @@ data Direction = Left | Right deriving Enum
 
 data CollideObject = Platform | Wall | Top | Bottom | BrickHit  deriving Enum 
 
-data ColorConfig = ColorConfig
-    {   brickColor :: Color
-    ,   ballColor :: Color
-    ,   platformColor :: Color
-    }
-
 data Brick = Brick 
     {
         position :: Point
     ,   hp       :: Int
     }
 
-data KeyType = LeftArrow | RightArrow | None deriving Eq 
-
 -- Текущее состояние
 data GameState = GameState
-    {    colors           :: ColorConfig
-    ,    score            :: Int
+    {    
+         score            :: Int
     ,    ballPosition     :: Point
     ,    ballDirection    :: Point
     ,    platformPosition :: Point

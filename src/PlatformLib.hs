@@ -9,15 +9,15 @@ import Structures
 
 
 drawPlatform :: Point -> Picture
-drawPlatform (x, y) = Pictures [Color blue $ uncurry Translate (x, y) (uncurry rectangleSolid (platformWidth, platformHeight))]
+drawPlatform (x, y) = Pictures [Color getPlatformColor $ uncurry Translate (x, y) (uncurry rectangleSolid (platformWidth, platformHeight))]
 
 changePlatformPosition :: Point -> Float -> Point 
 changePlatformPosition (x, y) k = (if newX < 400 && newX > -400 then newX else x, y)
     where 
         newX = x + k*platformSpeed 
 
-flipDirectionVerticalyP :: Float -> GameState -> Point
-flipDirectionVerticalyP  angle state@GameState{..} = newDirection
+calculateDirection :: Float -> GameState -> Point
+calculateDirection  angle state@GameState{..} = newDirection
         -- Direction = Direction - 2.f * (Direction.x * n.x + Direction.y * n.y) * n 
         -- n = (0.f, 1.f)
         where 
@@ -40,7 +40,7 @@ flipDirectionVerticalyP  angle state@GameState{..} = newDirection
             --newDirection = (fst newD / len, snd newD / len)
 
 collidePlatform :: GameState -> Point
-collidePlatform state@GameState{..}   | dist <= r * r/4 = flipDirectionVerticalyP angle state
+collidePlatform state@GameState{..}   | dist <= r * r/4 = calculateDirection angle state
                                       | otherwise = ballDirection
                     where
                         r = ballRadius 
@@ -68,12 +68,6 @@ collidePlatform state@GameState{..}   | dist <= r * r/4 = flipDirectionVerticaly
                         dist = (distX*distX) + (distY*distY)
 
 
-applyPositionP :: GameState -> GameState 
-applyPositionP state@GameState{..} = state{ballPosition = newPosition}
-    where 
-        newX = fst ballPosition  + ballSpeed * fst ballDirection
-        newY = snd ballPosition  + ballSpeed * snd ballDirection
-        newPosition = (newX, newY)
 
 resolvePlatformCollision :: GameState  -> GameState 
 resolvePlatformCollision state@GameState{..} = newState
